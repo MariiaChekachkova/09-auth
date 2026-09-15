@@ -45,16 +45,19 @@ export default function NotesClient({ tag }: NotesClientProps) {
             Create Note +
           </Link>
         </div>
+        {data.notes.length > 0 && (
+          <>
+            {data.totalPages > 1 && (
+              <Pagination
+                pageCount={data.totalPages}
+                currentPage={page}
+                onPageChange={setPage}
+              />
+            )}
 
-        {data.totalPages > 1 && (
-          <Pagination
-            pageCount={data.totalPages}
-            currentPage={page}
-            onPageChange={setPage}
-          />
+            <NoteList notes={data.notes} />
+          </>
         )}
-
-        <NoteList notes={data.notes} />
       </main>
     </>
   );

@@ -8,17 +8,17 @@ interface FetchNotesResponse {
   totalPages: number;
 }
 
-export const checkSession = async (): Promise<boolean> => {
+export const checkSession = async () => {
   const cookieStore = await cookies();
   const cookieHeader = cookieStore.toString();
-  try {
-    const response = await api.get<{ success: boolean }>("/auth/session", {
-      headers: { Cookie: cookieHeader },
-    });
-    return response.data.success;
-  } catch {
-    return false;
-  }
+
+  const response = await api.get("/auth/session", {
+    headers: {
+      Cookie: cookieHeader,
+    },
+  });
+
+  return response;
 };
 
 export const getMe = async (): Promise<User> => {
